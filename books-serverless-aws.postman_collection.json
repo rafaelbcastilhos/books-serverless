@@ -1,0 +1,218 @@
+{
+	"info": {
+		"_postman_id": "500a2c27-f91e-481c-9f1c-a3b8c4de0eb9",
+		"name": "books-aws-serverless",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "online",
+			"item": [
+				{
+					"name": "listBooks",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{id}.execute-api.{region}.amazonaws.com/{stage}/books",
+							"protocol": "https",
+							"host": [
+								"{id}",
+								"execute-api",
+								"{region}",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"{stage}",
+								"books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getBook/{id}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{id}.execute-api.{region}.amazonaws.com/{stage}/books/{id}",
+							"protocol": "https",
+							"host": [
+								"{id}",
+								"execute-api",
+								"{region}",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"{stage}",
+								"books",
+								"{id}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addBook",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Domain-Driven Design\",\n\t\"author\": \"Eric Evans\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{id}.execute-api.{region}.amazonaws.com/{stage}/books",
+							"protocol": "https",
+							"host": [
+								"{id}",
+								"execute-api",
+								"{region}",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"{stage}",
+								"books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteBook",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://{id}.execute-api.{region}.amazonaws.com/{stage}/books/{id}",
+							"protocol": "https",
+							"host": [
+								"{id}",
+								"execute-api",
+								"{region}",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"{stage}",
+								"books",
+								"{id}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "offline",
+			"item": [
+				{
+					"name": "listBooks",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/{stage}/books/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"{stage}",
+								"books",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getBook/{id}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/{stage}/books/{id]",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"{stage}",
+								"books",
+								"{id]"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addBook",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Domain-Driven Design\",\n\t\"author\": \"Eric Evans\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/{stage}/books/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"{stage}",
+								"books",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteBook",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/{stage}/books/{id}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"{stage}",
+								"books",
+								"{id}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
