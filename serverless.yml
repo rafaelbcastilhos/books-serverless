@@ -1,0 +1,95 @@
+service: books-aws-serverless
+
+custom:
+  booksTableName: 'books-${self:provider.stage}'
+  dynamodb:
+    stages:
+      - dev
+    start:
+      port: 8000
+      inMemory: true
+      heapInitial: 200m
+      heapMax: 1g
+      migrate: true
+      seed: true
+      convertEmptyValues: true
+
+provider:
+  name: aws
+  runtime: java11
+  memorySize: 512
+  timeout: 20
+  stage: ${opt:stage, 'dev'}
+  region: ${opt:region, 'us-east-1'}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource:
+        - { "Fn::GetAtt": ["BooksDynamoDBTable", "Arn" ] }
+  environment:
+    BOOKS_TABLE_NAME: ${self:custom.booksTableName}
+
+package:
+  artifact: 'target/${self:service}-${self:provider.stage}.jar'
+
+
+
+functions:
+  listBooks:
+    handler: com.serverless.handlers.ListBookHandler
+    events:
+      - http:
+          path: /books
+          method: get
+          integration: lambda
+          cors: true
+  getBook:
+    handler: com.serverless.handlers.GetBookHandler
+    events:
+      - http:
+          path: /books/{id}
+          method: get
+          integration: lambda
+          cors: true
+  addBook:
+    handler: com.serverless.handlers.AddBookHandler
+    events:
+      - http:
+          path: /books
+          method: post
+          integration: lambda
+          cors: true
+  deleteBook:
+    handler: com.serverless.handlers.DeleteBookHandler
+    events:
+      - http:
+          path: /books/{id}
+          method: delete
+          integration: lambda
+          cors: true
+
+resources:
+  Resources:
+    BooksDynamoDBTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:custom.booksTableName}
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+          - AttributeName: name
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+          - AttributeName: name
+            KeyType: RANGE
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
