@@ -19,7 +19,7 @@ public class AddBookHandler implements RequestHandler<Map<String, Object>, ApiGa
      *
      * @param input Entrada de dados da APIG.
      * @param context Contexto da APIG
-     * @return {@link Book} Retorno da criação do objeto carro
+     * @return {@link Book} Retorno da criação do objeto
      */
     @Override
     public ApiGatewayResponse handleRequest(Map<String, Object> input, Context context) {
